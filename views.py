@@ -4,3 +4,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 def header(request):
     return render_to_response('header.html')
+
+def materials_page(request):
+    return render_to_response('materials_page.html')
