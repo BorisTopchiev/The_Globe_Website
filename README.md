@@ -16,6 +16,6 @@ Main goal of this work - get a good experience in using of different types of da
 ## Development
  Part 1 - Simple design using HTML5, CSS3 (with animations), bootstrap was created for Main Page and Materials Page
  
- ![alt tag](https://github.com/BorisTopchiev/The_Globe_Website/blob/master/static/Screenshots/materials_interface_design.png)
-            *Materials menu design*
+ ![alt tag](https://github.com/BorisTopchiev/The_Globe_Website/blob/master/Project/static/Screenshots/materials_interface_design.png)
+                              *Materials menu design*
  
