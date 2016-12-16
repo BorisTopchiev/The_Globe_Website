@@ -1,9 +1,25 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from sql_lib import SQLBase
 
+sqlDB = SQLBase()
 
 def header(request):
-    return render_to_response('header.html')
+    return render(request, 'header.html')
+
+def main_page(request):
+    return render(request, 'main_page.html')
+
+def register_page(request):
+    print "registration"
+    if request.method == 'POST':
+        print "Creating user"
+        sqlDB.Create_User({'login': request.POST['login'], 'email': request.POST['email'], 'password': request.POST['password'], 'name': request.POST['name'], 'surname': request.POST['surname']})
+
+        return redirect('/')
+
+    return render(request,'register_page.html')
+
 
 def materials_page(request):
-    return render_to_response('materials_page.html')
+    return render(request, 'materials_page.html')

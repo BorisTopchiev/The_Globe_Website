@@ -47,13 +47,161 @@
             -o-animation-fill-mode: forwards;
             animation-fill-mode: forwards;
         }
+        .cube{
+            color: white;
+            text-align: center;
+            height: 200px;
+            width: 300px;
+            margin-bottom: 10px;
+            background-color: #2aabd2;
+        }
+
+        .cube img{
+            margin-left: 10px;
+            margin-right: 10px;
+
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -o-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+
+        }
+
+        .cube:hover img{
+
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+            -o-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+
+        }
+
+        .cube h4{
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -o-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+
+        }
+
+        .cube:hover h4{
+
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+            -o-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+
+        }
+
+        .cube {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -o-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+
+        }
+
+        .cube:hover {
+
+            -webkit-transform: scale(1.05);
+            transform: scale(1.05);
+            -o-transform: scale(1.05);
+            -moz-transform: scale(1.05);
+            -ms-transform: scale(1.05);
+
+        }
+
+        @-webkit-keyframes padding {
+            from {padding-top: 5px}
+            to{padding-top: 25px}
+        }
+
+        @-moz-keyframes padding {
+            from {padding-top: 5px}
+            to{padding-top: 25px}
+        }
+
+        @-o-keyframes padding {
+            from {padding-top: 5px}
+            to{padding-top: 25px}
+        }
+
+
+        .hover01 a img {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -o-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+        .hover01 a:hover img {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+            -o-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+        }
+
+        .jumbotron h2{
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -o-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+
+        }
+
+        .jumbotron:hover h2{
+
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+            -o-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+
+        }
     </style>
+
+
 </head>
 <body>
     <div class="col-md-2">
-        <div class="hover01" style="margin-top: 20px; margin-left: 45px;">
-            <a href="http://relax.kpi.ua/"><img  src="{% static "Images/relax-logo.png" %}" height="200px" width="155px"></a>
+
+        <div id="custom-search-input" style="margin-top: 15px;">
+            <div class="input-group col-md-12">
+                <input type="text" class="form-control input-lg" placeholder="Buscar" />
+                <span class="input-group-btn">
+                    <button class="btn btn-info btn-lg" type="button">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
+            </div>
         </div>
+
+        <div class="hover01" style="margin-top: 20px; margin-left: 25px;">
+                <a href="http://relax.kpi.ua/"><img  src="{% static "Images/relax-logo.png" %}" height="200px" width="155px"></a>
+        </div>
+
     </div>
 
     <div class="col-md-8">
@@ -74,9 +222,14 @@
         </div>
     </div>
     <div class="col-md-2">
+
         <div class="hover01" style="margin-top: 15px; margin-right: 35px;">
             <a href="http://relax.kpi.ua/globus/"><img src="{% static "Images/globus-logo.png" %}" height="200px" width="200px"></a>
         </div>
+
+        <a href="registration" >Зареєструватись</a>
+
+
     </div>
     <div class="col-md-2" style="margin-top: 50px; margin-left: -250px;">
         <div class="hover01" style="margin-top: 15px;">
@@ -99,6 +252,9 @@
     <div class="col-md-2">
 
     </div>
+
+    {% block content %}
+    {% endblock %}
 
 </body>
 </html>
