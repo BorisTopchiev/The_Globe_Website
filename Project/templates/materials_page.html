@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="{% static "js/jquery-2.2.4.min.js" %}"></script>
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <title>Матеріали - Турклуб "Глобус"</title>
+
+    <style>
+        body {
+            background-image: url('{% static "Images/background.jpg" %}');
+        }
+
+        .container{
+            background-color: rgba(255,255,255, 0.8);
+        }
+
+
+        .jumbotron {
+            color: white;
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            margin-left: -7px;
+            margin-right: -7px;
+            background-color: #2aabd2;
+        }
+
+        .jumbotron:hover {
+            -webkit-animation: padding 1s ease-out;
+            -moz-animation-direction: padding 1s ease-out;
+            -o-animation: padding 1s ease-out;
+            animation: padding 1s ease-out;
+
+            -webkit-animation-fill-mode: forwards;
+            -moz-animation-fill-mode: forwards;
+            -o-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-md-2">
+        <div class="hover01" style="margin-top: 20px; margin-left: 45px;">
+            <a href="http://relax.kpi.ua/"><img  src="{% static "Images/relax-logo.png" %}" height="200px" width="155px"></a>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="col-md-4">
+            <div class="jumbotron">
+                <h2>Форум</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="jumbotron">
+                <h2>Блог</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="jumbotron">
+                <a href = "#"><h2>Матеріали</h2></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="hover01" style="margin-top: 15px; margin-right: 35px;">
+            <a href="http://relax.kpi.ua/globus/"><img src="{% static "Images/globus-logo.png" %}" height="200px" width="200px"></a>
+        </div>
+    </div>
+    <div class="col-md-2" style="margin-top: 50px; margin-left: -250px;">
+        <div class="hover01" style="margin-top: 15px;">
+            <a href="https://vk.com/globus_kpi"><img src="{% static "Images/vk.png" %}" height="64px" width="64px"></a>
+        </div>
+        <div class="hover01" style="margin-top: 15px;">
+            <a href="https://www.facebook.com/tkg.org.ua/"><img src="{% static "Images/fb.png" %}" height="64px" width="64px"></a>
+        </div>
+        <div class="hover01" style="margin-top: 15px;">
+            <a href="https://www.instagram.com/globuskpi/"><img src="{% static "Images/insta.png" %}" height="64px" width="64px"></a>
+        </div>
+    </div>
+    <div class="col-md-8" style="margin-left: 10px;">
+{#        <div class="col-md-1"></div>#}
+
+        <div class="col-md-3" style="margin-right: 63px;" >
+            <div class="cube" style="background-color: #31b0d5">
+                <img src="{% static 'Images/icons/vids.png' %}" style="height: 110px; width: 110px; margin-top: 30px">
+                <h4>Відео</h4>
+            </div>
+            <div class="cube" style="background-color: #5bc0de">
+                <img src="{% static 'Images/icons/films.png' %}" style="height: 110px; width: 110px; margin-top: 30px">
+                <h4>Фільми</h4>
+            </div>
+        </div>
+        <div class="col-md-3" >
+            <div class="cube" style="background-color: #5bc0de">
+                <img src="{% static 'Images/icons/books.png' %}" style="height: 110px; width: 110px; margin-top: 30px">
+                <h4>Книги</h4>
+            </div>
+            <div class="cube" style="background-color: #31b0d5">
+                <img src="{% static 'Images/icons/maps.png' %}" style="height: 110px; width: 110px; margin-top: 30px">
+                <h4>Мапи</h4>
+            </div>
+        </div>
+        <div class="col-md-3" style="margin-left: 63px;">
+            <div class="cube" style="background-color: #31b0d5">
+                <img src="{% static 'Images/icons/info.png' %}" style="height: 110px; width: 110px; margin-top: 30px">
+                <h4>Статті, лекції</h4>
+            </div>
+            <div class="cube" style="background-color: #5bc0de">
+                <img src="{% static 'Images/icons/docs.png' %}" style="height: 110px; width: 110px; margin-top: 30px">
+                <h4>Звіти</h4>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+
+
+    </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+
+</body>
+</html>
