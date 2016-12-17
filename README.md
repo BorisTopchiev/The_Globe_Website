@@ -18,4 +18,7 @@ Main goal of this work - get a good experience in using of different types of da
  
  ![alt tag](https://github.com/BorisTopchiev/The_Globe_Website/blob/master/Project/static/Screenshots/materials_interface_design.png)
                               *Materials menu design*
+![alt_tag]
+(https://github.com/BorisTopchiev/The_Globe_Website/blob/master/Project/static/Screenshots/login_page.png)
+                              *Login page design*
  
