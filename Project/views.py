@@ -24,7 +24,11 @@ def register_page(request):
 def login_page(request):
     print "logining"
     if request.method== 'POST':
-        return redirect('/')
+        user = authenticate(username=request.POST['login'], password=request.POST['password'])
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect('/')
 
     return render(request, 'login_page.html')
 
