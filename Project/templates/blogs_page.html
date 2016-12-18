@@ -1,0 +1,156 @@
+{% extends 'header.html' %}
+{%  load staticfiles%}
+{% block content %}
+    <style>
+        .blog_post{
+            color: white;
+            text-align: center;
+            height: 100px;
+            width: 300px;
+            margin-bottom: 10px;
+            background-color: #2aabd2;
+        }
+
+        .blog_post img{
+            margin-left: 10px;
+            margin-right: 10px;
+
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -o-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+
+        }
+
+        .blog_post:hover img{
+
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+            -o-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+
+        }
+
+        .blog_post h4{
+            margin-top: 20px;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -o-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+
+        }
+
+        .blog_post:hover h4{
+
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+            -o-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+
+        }
+
+        .blog_post{
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -o-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+
+        }
+
+        .blog_post:hover {
+
+            -webkit-transform: scale(1.05);
+            transform: scale(1.05);
+            -o-transform: scale(1.05);
+            -moz-transform: scale(1.05);
+            -ms-transform: scale(1.05);
+
+        }
+
+        @-webkit-keyframes padding {
+            from {padding-top: 5px}
+            to{padding-top: 25px}
+        }
+
+        @-moz-keyframes padding {
+            from {padding-top: 5px}
+            to{padding-top: 25px}
+        }
+
+        @-o-keyframes padding {
+            from {padding-top: 5px}
+            to{padding-top: 25px}
+        }
+
+
+        .hover01 a img {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -o-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+        .hover01 a:hover img {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+            -o-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+        }
+    </style>
+    <div class="col-md-8">
+        <div class="container" style="width: 950px;">
+            <div class="topic">
+                <h2>Усі дописи</h2>
+                <hr style="color: #31b0d5">
+            </div>
+
+            {% for blog in blogs %}
+                <div class="col-md-4">
+                    <div class="blog_post" style="background-color: #31b0d5">
+    {#                    <img src="{% static 'Images/icons/vids.png' %}" style="height: 110px; width: 110px; margin-top: 30px">#}
+                        <h4>{{ blog.name }}</h4>
+                        <h6>{{ blog.author.login }}</h6>
+    {#                  <button class="ui red button">Delete</button>#}
+    {#                    <a href="/remove/{{ order|underscore:'_id' }}">    #}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+{#            <div>#}
+{#                <span class="step-links">#}
+{#                    <h3>#}
+{#                        {% if blogs.has_previous %}#}
+{#                            <a href="?page={{ blogs.previous_page_number }}"><button class="button4">PREVIOUS</button></a>#}
+{#                        {% endif %}#}
+{##}
+{#                        <span class="current">#}
+{#                            Page <b>{{ blogs.number }}</b> of <b>{{ blogs.paginator.num_pages }}</b>#}
+{#                        </span>#}
+{##}
+{#                        {% if blogs.has_next %}#}
+{#                            <a href="?page={{ blogs.next_page_number }}"><button class="button4">NEXT</button> </a>#}
+{#                        {% endif %}#}
+{#                    </h3>#}
+{#                </span>#}
+{#            </div>#}
+
+    </div>
+{% endblock %}

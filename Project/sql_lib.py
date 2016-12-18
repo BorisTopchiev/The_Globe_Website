@@ -6,3 +6,5 @@ class SQLBase:
         user.first_name = str(info['name'])
         user.last_name = str(info['surname'])
         user.save()
+
+
