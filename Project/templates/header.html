@@ -20,6 +20,7 @@
 
         body {
             background-image: url('{% static "Images/background.jpg" %}');
+            background-attachment: fixed;
         }
 
         .container{
@@ -216,8 +217,15 @@
 {#            <a href="http://relax.kpi.ua/globus/"><img src="{% static "Images/globus-logo.png" %}" height="200px" width="200px"></a>#}
 {#        </div>#}
     <div class="col-md-2">
-            <h4><a href="{% url 'login_page' %}" style="color: #a6e1ec; margin-left: 50px;">Авторизуватись</a></h4>
-            <h4><a href="{%  url 'register_page' %}" style="color: #a6e1ec; margin-left: 50px;">Зареєструватись</a></h4>
+        <div>
+            {% if user.is_authenticated %}
+                <h4  style="color: #a6e1ec; margin-left: 50px;">{{ user.username }}</h4>
+                <h4 style="margin-left: 50px;"><a href="{% url 'logout_user' %}" style="color: #a6e1ec; ">Вийти</a></h4>
+            {% else %}
+                <h4><a href="{% url 'login_page' %}" style="color: #a6e1ec; margin-left: 50px;">Авторизуватись</a></h4>
+                <h4><a href="{%  url 'register_page' %}" style="color: #a6e1ec; margin-left: 50px;">Зареєструватись</a></h4>
+            {% endif %}
+        </div>
     </div>
 
     <div class="col-md-12">
@@ -238,9 +246,6 @@
     </div>
     <div class="col-md-8">
         <div class="container">
-
-{#        {% block content %}#}
-{#        {% endblock %}#}
         </div>
     </div>
     <div class="col-md-2">

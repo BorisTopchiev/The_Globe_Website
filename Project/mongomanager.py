@@ -31,18 +31,6 @@ class DataBase:
         blog = self.db.blogs.find_one({'_id': ObjectId(id)})
         return blog
 
-    # def getClientsList(self):
-    #     clients = list(self.db.clients.find())
-    #     return clients
-
-    # def getMenuList(self):
-    #     menu = list(self.db.menu.find())
-    #     return menu
-
-    # def getCouriersList(self):
-    #     couriers = list(self.db.couriers.find())
-    #     return couriers
-
     def removeBlog(self, id):
         blog = self.db.blog.find_one({'_id': ObjectId(id)})
 
@@ -85,6 +73,11 @@ class DataBase:
         print query
         blogs = list(self.db.blogs.find(query))
         return list(blogs)
+
+
+    def getBlogsByAuthor(self,login):
+        blogs = self.db.blogs.find({'author.login': str(login)})
+        return blogs
 
     def updateBlog(self, info):
         print info

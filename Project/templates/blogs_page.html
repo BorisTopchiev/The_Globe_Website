@@ -120,7 +120,9 @@
         <div class="container" style="width: 950px;">
             <div class="topic">
                     <h2>Усі дописи</h2>
-                    <a type="button" class="btn btn-info btn-lg btn3d" href="{% url 'add_page' %}"><span class="glyphicon glyphicon-pencil"></span>Створити допис</a>
+                    {% if user.is_autheticated %}
+                        <a type="button" class="btn btn-info btn-lg btn3d" href="{% url 'add_page' %}"><span class="glyphicon glyphicon-pencil"></span>Створити допис</a>
+                    {% endif %}
                     <hr style="color: #31b0d5">
             </div>
                 <form action={{ request.get_full_path }}>{% csrf_token %}
@@ -158,11 +160,11 @@
     {#                    <img src="{% static 'Images/icons/vids.png' %}" style="height: 110px; width: 110px; margin-top: 30px">#}
                         <a href="{% url 'blog_post' blog|underscore:'_id' %}"><h4>{{ blog.name }}</h4></a>
                         <h6>{{ blog.author.login }}</h6>
+                        {% if user.is_superuser %}
                         <a href="/remove/{{ blog|underscore:'_id' }}">
                             <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                         </a>
-{#                        <button class="ui red button">Delete</button>#}
-    {#                    <a href="/remove/{{ order|underscore:'_id' }}">    #}
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

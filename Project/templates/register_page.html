@@ -1,6 +1,5 @@
 {% extends 'header.html' %}
 {%  load staticfiles %}
-{% block title %}Реєстрація - Турклуб "Глобус"{%endblock %}
 {% block content %}
     <head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,8 +21,6 @@
     <style>
         body, html{
          height: 100%;
-{#        background-repeat: repeat-x;#}
-        background-color: #d3d3d3;
         font-family: 'Oxygen', sans-serif;
         }
 
@@ -138,76 +135,77 @@
     </style>
 
     <div class="col-md-8">
-    <div class="container" style="width: 800px;" >
-			<div class="row main">
-				<div class="panel-heading" >
-	               <div class="panel-title text-center">
-	               		<h1 class="title">Анкета користувача</h1>
-	               		<hr />
-	               	</div>
-	            </div>
-                    <div class="main-login main-center" >
+        <div class="container" style="width: 800px;" >
+                <div class="row main">
+                    <div class="panel-heading" >
+                       <div class="panel-title text-center">
+                            <h1 class="title">Анкета користувача</h1>
+                            <hr />
+                        </div>
+                    </div>
+                        <div class="main-login main-center" >
 
-                            <form class="form-vertical" method="post" role="form" style="width: 350px;">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label for="name" class="cols-sm-2 control-label">Ім'я</label>
-                                <div class="cols-sm-10">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="name" id="name"  placeholder="Ввести ім'я"/>
+                                <form class="form-vertical" method="post" role="form" style="width: 350px;">
+                                {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="username" class="cols-sm-2 control-label">Логін</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="login" pattern="[A-Za-z0-9_.-]+" id="login" minlength="4" maxlength="15" placeholder="Ввести логін"/>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="name" class="cols-sm-2 control-label">Прізвище</label>
-                                <div class="cols-sm-10">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="surname" id="surname"  placeholder="Ввести прізвище"/>
+                                    <div class="form-group">
+                                        <label for="name" class="cols-sm-2 control-label">Ім'я</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="name" pattern="[A-Za-z-]+" id="name" minlength="3" maxlength="15" placeholder="Ввести ім'я"/>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="cols-sm-2 control-label">Електронна адреса</label>
-                                <div class="cols-sm-10">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="email" id="email"  placeholder="Ввести email"/>
+                                    <div class="form-group">
+                                        <label for="name" class="cols-sm-2 control-label">Прізвище</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="surname" pattern="[A-Za-z-]+" id="surname" minlength="3" maxlength="15" placeholder="Ввести прізвище"/>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="username" class="cols-sm-2 control-label">Логін</label>
-                                <div class="cols-sm-10">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="login" id="login"  placeholder="Ввести логін"/>
+                                    <div class="form-group">
+                                        <label for="email" class="cols-sm-2 control-label">Електронна адреса</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="email" pattern="[A-Za-z0-9_-]+@[A-za-z0-9]+\.[a-z]+" id="email" maxlength="30" placeholder="Ввести email"/>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="cols-sm-2 control-label">Пароль</label>
-                                <div class="cols-sm-10">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                        <input type="password" class="form-control" name="password" id="password"  placeholder="Ввести пароль"/>
+
+                                    <div class="form-group">
+                                        <label for="password" class="cols-sm-2 control-label">Пароль</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                                <input type="password" class="form-control" name="password" id="password" pattern="[A-Za-z0-9_-]+" minlength="7" maxlength="15" placeholder="Ввести пароль"/>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                                <div class="form-group ">
-                                    <button type="submit" name="add" value="Add" class="btn btn-primary btn-lg btn-block login-button">Зареєструватися</button>
-						        </div>
-{#                            <input type="submit" name="add" value="Add"/>#}
-                            <div class="login-register">
-                                <a href="#">Увійти до профілю</a>
-                            </div>
-					</form>
+                                        <div class="form-group ">
+                                            <button type="submit" name="add" value="Add" class="btn btn-primary btn-lg btn-block login-button">Зареєструватися</button>
+                                        </div>
+        {#                            <input type="submit" name="add" value="Add"/>#}
+                                    <div class="login-register">
+                                        <a href="#">Увійти до профілю</a>
+                                    </div>
+                        </form>
 
 
-				</div>
-			</div>
-		</div>
+                    </div>
+                </div>
+            </div>
     </div>
 {#		<script type="text/javascript" src="assets/js/bootstrap.js"></script>#}
 
