@@ -1,0 +1,35 @@
+{% extends 'header.html' %}
+{%  load staticfiles%}
+{% load filter %}
+{% block content %}
+    <div class="col-md-8">
+        <div class="container" style="width: 950px;">
+            <form action={{ request.get_full_path }} method="post" class="form-vertical" role="form">
+
+                {% csrf_token %}
+                <div class="form-group">
+                    <h3><label for="client">Заголовок допису:</label></h3>
+                    <input class="form-control" type="text" name="blog_name"/>
+                </div>
+                <div class="form-group">
+                    <h3><label for="courier">Зміст допису:</label><h3>
+                    <textarea class="form-control" rows=7 type="text" name="text"></textarea>
+                </div>
+                <div class="form-group">
+                    <h3><label for="plate">Тематика:</label></h3>
+                    <select class="form-control" id="topic_name" name="topic_name">
+                        <option value="Other">Інше</option>
+                        <option value="Competitions">Змагання</option>
+                        <option value="Lifehacks">Лайфхаки</option>
+                        <option value="Journeys">Подорожі</option>
+                        <option value="Descriptions">Описи</option>
+                        <option value="Technique">Техніка</option>
+                        <option value="Events">Події</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success btn-lg" name="add">Створити допис</button>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -38,9 +38,20 @@ def materials_page(request):
     return render(request, 'materials_page.html')
 
 def blogs_page(request):
+    # msgs = ""
+    # status = ""
+    if ('topic_name' in request.GET and request.GET['topic_name'] != '0'):
+        # if db.status(request) == 0:
+        #     status = "using cash"
+        # else:
+        #     status = "without cash"
 
-
-    blogs_list = db.getAllBlogs()
+        # start_time = time.time()
+        blogs_list = db.getBlogsByTopic(request)
+        # time_res = time.time() - start_time
+        # msgs = str(time_res)
+    else:
+        blogs_list = db.getAllBlogs()
 
     paginator = Paginator(blogs_list, 30)  # Show per page
     page = request.GET.get('page')
@@ -61,3 +72,17 @@ def load_blog(request, id):
     blog = db.getBlog(id)
 
     return render(request, 'blog_post.html', {'blog': blog})
+
+def add_blog(request):
+    if request.method == 'POST':
+            print request.POST['blog_name']
+            print request.POST['text']
+            print request.POST['topic_name']
+            db.saveBlog({'name': request.POST['blog_name'], 'text': request.POST['text'], 'topic': request.POST['topic_name']})
+            return redirect('/blogs/')
+    elif request.method == 'GET':
+       return render(request, 'add_page.html')
+
+def remove_post(request,id):
+    db.removeBlog(id)
+    return redirect('/')

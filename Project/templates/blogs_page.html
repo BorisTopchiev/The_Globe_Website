@@ -119,17 +119,49 @@
     <div class="col-md-8">
         <div class="container" style="width: 950px;">
             <div class="topic">
-                <h2>Усі дописи</h2>
-                <hr style="color: #31b0d5">
+                    <h2>Усі дописи</h2>
+                    <a type="button" class="btn btn-info btn-lg btn3d" href="{% url 'add_page' %}"><span class="glyphicon glyphicon-pencil"></span>Створити допис</a>
+                    <hr style="color: #31b0d5">
             </div>
-
+                <form action={{ request.get_full_path }}>{% csrf_token %}
+                      <div class="col-md-3">
+                        <div class="form-group" width = "500">
+    {#                    <label for="customer" class="label" ><h2>Search:</h2></label>#}
+                            <select  class="turnintodropdown" name="topic_name">
+                                    <option value="All">Усі</option>
+                                    <option value="Competitions">Змагання</option>
+                                    <option value="Lifehacks">Лайфхаки</option>
+                                    <option value="Journeys">Подорожі</option>
+                                    <option value="Descriptions">Описи</option>
+                                    <option value="Technique">Техніка</option>
+                                    <option value="Events">Події</option>
+                                    <option value="Other">Інше</option>
+                            </select>
+                        </div>
+                      </div>
+                <div class="col-md-9">
+                    <div id="custom-search-input" style="margin-top: 15px;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control input-lg" placeholder="" name="search_str" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-info btn-lg" type="submit">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                </form>
             {% for blog in blogs %}
                 <div class="col-md-4">
                     <div class="blog_post" style="background-color: #31b0d5">
     {#                    <img src="{% static 'Images/icons/vids.png' %}" style="height: 110px; width: 110px; margin-top: 30px">#}
                         <a href="{% url 'blog_post' blog|underscore:'_id' %}"><h4>{{ blog.name }}</h4></a>
                         <h6>{{ blog.author.login }}</h6>
-    {#                  <button class="ui red button">Delete</button>#}
+                        <a href="/remove/{{ blog|underscore:'_id' }}">
+                            <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                        </a>
+{#                        <button class="ui red button">Delete</button>#}
     {#                    <a href="/remove/{{ order|underscore:'_id' }}">    #}
                     </div>
                 </div>

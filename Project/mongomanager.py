@@ -47,12 +47,13 @@ class DataBase:
         blog = self.db.blog.find_one({'_id': ObjectId(id)})
 
         self.db.blogs.delete_one({'_id': ObjectId(id)})
-        self.r.delete(blog["name"]["_id"])
+        # self.r.delete(blog["name"]["_id"])
 
     def saveBlog(self, info):
         name = info['name']
         text = info['text']
-        author = self.db.users.find_one({'_id': ObjectId(info['author'])})
+        # author = self.db.users.find_one({'_id': ObjectId("boris-t")})
+        author = "boris-t"
         comments = []
         topic = info['topic']
         blog_post = {'name': name, 'text': text, 'author': author, 'topic': topic,'comments': comments, 'likes': 0}
@@ -74,6 +75,16 @@ class DataBase:
             self.db.blogs.insert(blog_post)
         print "Data generated!"
 
+
+    def getBlogsByTopic(self,request):
+        query = {}
+        if request.GET['search_str'] != "":
+            query["name"] = str(request.GET['search_str'])
+        if request.GET['topic_name'] != "All":
+            query["topic"] = str(request.GET['topic_name'])
+        print query
+        blogs = list(self.db.blogs.find(query))
+        return list(blogs)
 
     def updateBlog(self, info):
         print info
