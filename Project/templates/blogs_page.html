@@ -1,13 +1,14 @@
 {% extends 'header.html' %}
 {%  load staticfiles%}
+{% load filter %}
 {% block content %}
     <style>
         .blog_post{
             color: white;
             text-align: center;
             height: 100px;
-            width: 300px;
-            margin-bottom: 10px;
+            width: 290px;
+            margin-bottom: 0px;
             background-color: #2aabd2;
         }
 
@@ -126,31 +127,30 @@
                 <div class="col-md-4">
                     <div class="blog_post" style="background-color: #31b0d5">
     {#                    <img src="{% static 'Images/icons/vids.png' %}" style="height: 110px; width: 110px; margin-top: 30px">#}
-                        <h4>{{ blog.name }}</h4>
+                        <a href="{% url 'blog_post' blog|underscore:'_id' %}"><h4>{{ blog.name }}</h4></a>
                         <h6>{{ blog.author.login }}</h6>
     {#                  <button class="ui red button">Delete</button>#}
     {#                    <a href="/remove/{{ order|underscore:'_id' }}">    #}
                     </div>
                 </div>
             {% endfor %}
-        </div>
-{#            <div>#}
-{#                <span class="step-links">#}
-{#                    <h3>#}
-{#                        {% if blogs.has_previous %}#}
-{#                            <a href="?page={{ blogs.previous_page_number }}"><button class="button4">PREVIOUS</button></a>#}
-{#                        {% endif %}#}
-{##}
-{#                        <span class="current">#}
-{#                            Page <b>{{ blogs.number }}</b> of <b>{{ blogs.paginator.num_pages }}</b>#}
-{#                        </span>#}
-{##}
-{#                        {% if blogs.has_next %}#}
-{#                            <a href="?page={{ blogs.next_page_number }}"><button class="button4">NEXT</button> </a>#}
-{#                        {% endif %}#}
-{#                    </h3>#}
-{#                </span>#}
-{#            </div>#}
+        <div>
+                <span class="step-links">
+                    <h3>
+                        {% if blogs.has_previous %}
+                            <a href="?page={{ blogs.previous_page_number }}"><button class="button4">PREVIOUS</button></a>
+                        {% endif %}
 
+                        <span class="current">
+                            Page <b>{{ blogs.number }}</b> of <b>{{ blogs.paginator.num_pages }}</b>
+                        </span>
+
+                        {% if blogs.has_next %}
+                            <a href="?page={{ blogs.next_page_number }}"><button class="button4">NEXT</button> </a>
+                        {% endif %}
+                    </h3>
+                </span>
+            </div>
+        </div>
     </div>
 {% endblock %}

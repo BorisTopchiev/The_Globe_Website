@@ -214,12 +214,12 @@
         </div>
         <div class="col-md-4">
             <div class="jumbotron">
-                <a href="blogs"><h2>Блог</h2></a>
+                <a href="{%  url 'blogs_page' %}"><h2>Блог</h2></a>
             </div>
         </div>
         <div class="col-md-4">
             <div class="jumbotron">
-                <a href = "materials"><h2>Матеріали</h2></a>
+                <a href = "{%  url 'materials_page' %}"><h2>Матеріали</h2></a>
             </div>
         </div>
     </div>
@@ -228,8 +228,8 @@
 {#            <a href="http://relax.kpi.ua/globus/"><img src="{% static "Images/globus-logo.png" %}" height="200px" width="200px"></a>#}
 {#        </div>#}
     <div class="col-md-2">
-            <h4><a href="login" style="color: #a6e1ec; margin-left: 50px;">Авторизуватись</a></h4>
-            <h4><a href="registration" style="color: #a6e1ec; margin-left: 50px;">Зареєструватись</a></h4>
+            <h4><a href="{% url 'login_page' %}" style="color: #a6e1ec; margin-left: 50px;">Авторизуватись</a></h4>
+            <h4><a href="{%  url 'register_page' %}" style="color: #a6e1ec; margin-left: 50px;">Зареєструватись</a></h4>
     </div>
 
     <div class="col-md-12">

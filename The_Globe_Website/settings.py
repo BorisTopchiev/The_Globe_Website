@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'The_Globe_Website'
+    'Project'
 ]
 
 MIDDLEWARE = [

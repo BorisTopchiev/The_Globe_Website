@@ -1,0 +1,16 @@
+{% extends 'header.html' %}
+{%  load staticfiles%}
+{% block content %}
+    <div class="col-md-8">
+        <div class="container" style="width: 950px;">
+            <div class="topic">
+                <h2>{{ blog.name }}</h2>
+                <hr style="color: #31b0d5">
+                <h4>{{ blog.author.name }}</h4>
+            </div>
+            <div>
+                <p>{{ blog.text }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -42,17 +42,22 @@ def blogs_page(request):
 
     blogs_list = db.getAllBlogs()
 
-    # paginator = Paginator(blogs_list, 30)  # Show per page
-    # page = request.GET.get('page')
-    # try:
-    #     blogs = paginator.page(page)
-    # except PageNotAnInteger:
-    #     # If page is not an integer, deliver first page.
-    #     blogs = paginator.page(1)
-    # except EmptyPage:
-    #     # If page is out of range (e.g. 9999), deliver last page of results.
-    #     blogs = paginator.page(paginator.num_pages)
+    paginator = Paginator(blogs_list, 30)  # Show per page
+    page = request.GET.get('page')
+    try:
+        blogs = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        blogs = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        blogs = paginator.page(paginator.num_pages)
 
-    return render(request, 'blogs_page.html', {'blogs': blogs_list[0:20]})
+    return render(request, 'blogs_page.html', {'blogs': blogs})
 
     # return render(request, 'blogs_page.html', {'blogs': blogs_list})
+
+def load_blog(request, id):
+    blog = db.getBlog(id)
+
+    return render(request, 'blog_post.html', {'blog': blog})
