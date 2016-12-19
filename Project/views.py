@@ -96,3 +96,6 @@ def add_comment(request, id):
 
     return redirect('/blog_post/'+ id)
 
+
+def statistics_page(request):
+    return render(request, 'statistics.html')

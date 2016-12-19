@@ -43,7 +43,6 @@ class DataBase:
     def removeBlog(self, id):
         self.db.blogs.delete_one({'_id': ObjectId(id)})
         self.r.delete(ObjectId(id))
-        print "cache deleted"
 
     def saveBlog(self, info):
         name = info['name']
@@ -128,7 +127,46 @@ class DataBase:
         self.db.comments.insert({'username': info['username'], 'text': info['text'], 'datetime': info['datetime'], 'blog_id': ObjectId(id)})
         print "Success"
 
+    def createTimeInfo(self):
+    # def getMostCommented(self):
+    #     blogs = list(self.db.comments.aggregate(
+    #
+    #     ))
 
-# db = DataBase()
+
+    def getMostActiveUsers(self):
+        users = list(self.db.comments.aggregate(
+            [{"$project": {"username": "$username", "count": {"$add": [1]}}},
+             {"$group": {"_id": "$username", "number": {"$sum": "$count"}}}, {"$sort": {"number": -1}}, {"$limit": 5}]))
+        print users
+        return users
+
+    def getMostWritingUsers(self):
+        users = list(self.db.blogs.aggregate(
+            [{"$project": {"username": "$author.login", "count": {"$add": [1]}}},
+             {"$group": {"_id": "$username", "number": {"$sum": "$count"}}},
+             {"$sort": {"number": -1}}, {"$limit": 10}]
+        ))
+        print users
+        return users
+
+
+    # def getTopClientsAggregate(self):
+    #     clients = list(self.db.orders.aggregate(
+    #         [{"$unwind": "$client.name"}, {"$project": {"name": "$client.name", "count": {"$add": [1]}}},
+    #          {"$group": {"_id": "$name", "number": {"$sum": "$count"}}}, {"$sort": {"number": -1}}, {"$limit": 3}]))
+    #     print clients
+    #     return clients
+
+
+    # def getCacheLoadingTime(self):
+    #
+    #
+    # def getMongoLoadingTime(self):
+
+
+
+db = DataBase()
 # db.generate()
-
+# db.getMostActiveUsers()
+db.getMostWritingUsers()
