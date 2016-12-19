@@ -4,6 +4,7 @@ from bson.code import Code
 import redis
 import pickle  #???
 import random
+import datetime
 
 class DataBase:
     def __init__(self):
@@ -21,8 +22,6 @@ class DataBase:
 
         self.db.users.insert(user)
 
-
-
     def getAllBlogs(self):
         blogs = [blog for blog in self.db.blogs.find()]
         return blogs
@@ -32,21 +31,37 @@ class DataBase:
         return blog
 
     def removeBlog(self, id):
-        blog = self.db.blog.find_one({'_id': ObjectId(id)})
-
         self.db.blogs.delete_one({'_id': ObjectId(id)})
-        # self.r.delete(blog["name"]["_id"])
 
     def saveBlog(self, info):
         name = info['name']
         text = info['text']
         # author = self.db.users.find_one({'_id': ObjectId("boris-t")})
         author = "boris-t"
-        comments = []
         topic = info['topic']
-        blog_post = {'name': name, 'text': text, 'author': author, 'topic': topic,'comments': comments, 'likes': 0}
+        blog_post = {'name': name, 'text': text, 'author': author, 'topic': topic, 'likes': 0, 'datetime': datetime.datetime.now()}
         self.db.blogs.insert(blog_post)
-        # self.r.delete(ObjectId(info['name']))
+
+        query = {}
+        if self.r.exists(str(query)) != 0:
+            print "exist"
+            self.r.delete(str(query))
+        query['name'] = name
+        if self.r.exists(str(query)) != 0:
+            print "exist"
+            self.r.delete(str(query))
+
+        query = {}
+        query['topic'] = topic
+        if self.r.exists(str(query)) != 0:
+            print "exist"
+            self.r.delete(str(query))
+
+        query = {}
+        query['name'] = name
+        query['topic'] = topic
+        if self.r.exists(query) != 0:
+            self.r.delete(query)
 
     def generate(self):
         topics = ["Competitions", "Lifehacks", "Journeys", "Descriptions", "Technique", "Events", "Other"]
@@ -55,13 +70,11 @@ class DataBase:
             rand_author = random.randint(0,5)
             name = "Blog#" + str(i)
             rand_topic = random.randint(0,5)
-            comments = []
             author = self.db.users.find().skip(rand_author).next()
             topic = topics[rand_topic]
 
-            blog_post = {'name': name, 'text': text, 'author': author, 'topic': topic, 'comments': comments, 'likes': 0}
+            blog_post = {'name': name, 'text': text, 'author': author, 'topic': topic, 'likes': 0, 'datetime': datetime.datetime.now()}
             self.db.blogs.insert(blog_post)
-        print "Data generated!"
 
 
     def getBlogsByTopic(self,request):
@@ -71,46 +84,38 @@ class DataBase:
         if request.GET['topic_name'] != "All":
             query["topic"] = str(request.GET['topic_name'])
         print query
-        blogs = list(self.db.blogs.find(query))
-        return list(blogs)
+        # blogs = list(self.db.blogs.find(query))
+        # return list(blogs)
+        return self.search(query)
 
 
     def getBlogsByAuthor(self,login):
         blogs = self.db.blogs.find({'author.login': str(login)})
         return blogs
 
-    def updateBlog(self, info):
-        print info
-        name = info['name']
-        text = info['text']
-        author = self.db.users.find_one({'_id': ObjectId(info['author'])})
-        comments = []
-
-        blog_post = {'name': name, 'text': text, 'author': author, 'comments': comments, 'likes': 0}
-
-        # last_post = self.db.orders.find_one({'_id': ObjectId(info['name'])})
-        # self.r.delete(last_post["name"]["_id"])
-
-        # self.db.orders.update_one({'_id': ObjectId(info['order'])}, {'$set': order})
-
-        # self.r.delete(ObjectId(info['name']))
-
-
     # def status(self,request):
     #     if self.r.exists(request.GET['name']) != 0:
     #         return 0
     #     else: return 1
 
-    # def search(self, request):
-    #     if self.r.exists(request.GET['name']) != 0:
-    #         order = pickle.loads(self.r.get(request.GET['name']))
-    #     else:
-    #         query = {}
-    #         if request.GET['name'] != 0:
-    #             query["plate._id"] = ObjectId(request.GET['plate_id'])
-    #         order = list(self.db.orders.find(query))
-    #         self.r.set(request.GET['plate_id'], pickle.dumps(order))
-    #     return list(order)
+    def search(self, query):
+        if self.r.exists(query) != 0:
+            blogs = pickle.loads(self.r.get(query))
+            print "Using cache"
+        else:
+            blogs = list(self.db.blogs.find(query))
+            self.r.set(query, pickle.dumps(blogs))
+            print "Without cache"
+        return blogs
+
+    def getCommentsByBlog(self, id):
+        comments = [comment for comment in self.db.comments.find({'blog_id': ObjectId(id)})]
+        return comments
+
+    def addCommentToBlog(self, id, info):
+        self.db.comments.insert({'username': info['username'], 'text': info['text'], 'datetime': info['datetime'], 'blog_id': ObjectId(id)})
+        print "Success"
+
 
 # db = DataBase()
 # db.generate()

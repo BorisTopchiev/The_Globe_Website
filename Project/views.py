@@ -5,6 +5,8 @@ from sql_lib import SQLBase
 from django.contrib.auth.models import User
 from mongomanager import DataBase
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+import datetime
+import pprint
 
 sqlDB = SQLBase()
 db = DataBase()
@@ -65,7 +67,8 @@ def user_blogs_page(request, login):
 
 def load_blog(request, id):
     blog = db.getBlog(id)
-    return render(request, 'blog_post.html', {'blog': blog})
+    comments = db.getCommentsByBlog(id)
+    return render(request, 'blog_post.html', {'blog': blog, 'comments':comments})
 
 def add_blog(request):
     if request.method == 'POST':
@@ -79,4 +82,17 @@ def add_blog(request):
 
 def remove_post(request,id):
     db.removeBlog(id)
-    return redirect('/')
+    return redirect('/blogs/')
+
+
+def add_comment(request, id):
+    text = request.GET['comment']
+    if text !="":
+        username = request.user.username
+        date = datetime.datetime.now()
+        info = {'text': text, 'username': username, 'datetime': date}
+        db.addCommentToBlog(id, info)
+        print "comment added"
+
+    return redirect('/blog_post/'+ id)
+

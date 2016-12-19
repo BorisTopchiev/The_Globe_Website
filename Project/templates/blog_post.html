@@ -1,16 +1,43 @@
 {% extends 'header.html' %}
 {%  load staticfiles%}
+{% load filter %}
 {% block content %}
     <div class="col-md-8">
         <div class="container" style="width: 950px;">
             <div class="topic">
                 <h2>{{ blog.name }}</h2>
+                <h4><i>Дописано <u>{{ blog.author.login}}</u> </i> <small>{{ blog.datetime}}</small></h4>
                 <hr style="color: #31b0d5">
-                <h4>{{ blog.author.name }}</h4>
             </div>
-            <div>
+            <div class="well">
                 <p>{{ blog.text }}</p>
             </div>
+
+                {% for comment in comments %}
+                    <div class="well">
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <img style="height: 64px;width: 64px;" class="media-object" src="https://cdn4.iconfinder.com/data/icons/eldorado-user/40/user-128.png" alt="">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{ comment.username}}
+                                    <small>{{ comment.datetime}}</small>
+                               </h4>{{ comment.text }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% if user.is_authenticated %}
+            <div class="well">
+                    <h4>Залишити коментар</h4>
+                    <form role="form" method="get" action="/add_comment/{{ blog|underscore:'_id' }}">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" name="comment" value="{{ request.GET.comment }}"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Відправити</button>
+                    </form>
+            </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
