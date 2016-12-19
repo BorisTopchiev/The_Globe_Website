@@ -28,10 +28,22 @@ class DataBase:
 
     def getBlog(self, id):
         blog = self.db.blogs.find_one({'_id': ObjectId(id)})
+        if self.r.exists(ObjectId(id))!= 0:
+            blogs = pickle.loads(self.r.get(ObjectId(id)))
+            print "Using cache"
+        else:
+            query = {}
+            if id != 0:
+                query["_id"] = ObjectId(id)
+            blog = self.db.blogs.find_one({'_id': ObjectId(id)})
+            self.r.set(ObjectId(id), pickle.dumps(blog))
+            print "Without cache"
         return blog
 
     def removeBlog(self, id):
         self.db.blogs.delete_one({'_id': ObjectId(id)})
+        self.r.delete(ObjectId(id))
+        print "cache deleted"
 
     def saveBlog(self, info):
         name = info['name']
@@ -42,26 +54,26 @@ class DataBase:
         blog_post = {'name': name, 'text': text, 'author': author, 'topic': topic, 'likes': 0, 'datetime': datetime.datetime.now()}
         self.db.blogs.insert(blog_post)
 
-        query = {}
-        if self.r.exists(str(query)) != 0:
-            print "exist"
-            self.r.delete(str(query))
-        query['name'] = name
-        if self.r.exists(str(query)) != 0:
-            print "exist"
-            self.r.delete(str(query))
-
-        query = {}
-        query['topic'] = topic
-        if self.r.exists(str(query)) != 0:
-            print "exist"
-            self.r.delete(str(query))
-
-        query = {}
-        query['name'] = name
-        query['topic'] = topic
-        if self.r.exists(query) != 0:
-            self.r.delete(query)
+        # query = {}
+        # if self.r.exists(str(query)) != 0:
+        #     print "exist"
+        #     self.r.delete(str(query))
+        # query['name'] = name
+        # if self.r.exists(str(query)) != 0:
+        #     print "exist"
+        #     self.r.delete(str(query))
+        #
+        # query = {}
+        # query['topic'] = topic
+        # if self.r.exists(str(query)) != 0:
+        #     print "exist"
+        #     self.r.delete(str(query))
+        #
+        # query = {}
+        # query['name'] = name
+        # query['topic'] = topic
+        # if self.r.exists(query) != 0:
+        #     self.r.delete(query)
 
     def generate(self):
         topics = ["Competitions", "Lifehacks", "Journeys", "Descriptions", "Technique", "Events", "Other"]
